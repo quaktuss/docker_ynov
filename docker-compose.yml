@@ -1,9 +1,23 @@
 services:
-  mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: 'value'
-  myadmin:
-    image: phpmyadmin
-    ports:
-      - 8080:80
+  web:
+    image: praqma/network-multitool
+    container_name: web
+    networks:
+      - frontend
+
+  app:
+    image: praqma/network-multitool
+    container_name: app
+    networks:
+      - frontend
+      - backend
+
+  db:
+    image: praqma/network-multitool
+    container_name: db
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:

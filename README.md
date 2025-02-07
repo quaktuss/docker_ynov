@@ -38,3 +38,44 @@ Le `docker-compose.yml` apporte une simplicité dans la chose, car en un fichier
 
 Les variables environnement permettent en plus de configurer plus profondément mysql.
 
+```yaml
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'mypassword'
+  myadmin:
+    image: phpmyadmin
+    ports:
+      - 80:80
+    environment:
+      PMA_HOST: mysql
+```
+
+
+## Observation de l’isolation réseau entre 3 conteneurs
+```yaml
+services:
+  web:
+    image: praqma/network-multitool
+    container_name: web
+    networks:
+      - frontend
+
+  app:
+    image: praqma/network-multitool
+    container_name: app
+    networks:
+      - frontend
+      - backend
+
+  db:
+    image: praqma/network-multitool
+    container_name: db
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+```
