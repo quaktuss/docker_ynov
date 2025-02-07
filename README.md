@@ -1,7 +1,7 @@
 
  ## Exécuter un serveur web (apache, nginx, …) dans un conteneur docker
 
-```
+```bash
 $ docker pull nginx
 $ docker image ls
 $ echo "Hello World" >> html/index.html
@@ -13,7 +13,7 @@ $ docker cp ./html/index.html mathieu-nginx:/usr/share/nginx/html/index.html
 ```
 
 ## Builder une image
-```
+```bash
 $ touch Dockerfile
 $ docker built -t mynginx .
 $ docker run --name mathieu-nginx -p 80:80 -d my-nginx
@@ -25,3 +25,16 @@ La difference avec l'exercice précédent, est qu'il est moins fastidieux de cr�
 L'inconvenient de la partie Dockerfile est qu'une modification prends plus de temps que en CLI
 
 ## Utiliser une base de données dans un conteneur docker
+```bash
+$ docker run --name mysql-server -e MYSQL_ROOT_PASSWORD=mypassword -d mysql:5.7
+
+$ docker run --name phpmyadmin-container --link mysql-container:db -p 8080:80 -d phpmyadmin
+
+```
+
+## Faire la même chose que précédemment en utilisant un fichier docker-compose.yml
+
+Le `docker-compose.yml` apporte une simplicité dans la chose, car en un fichier, on peut créer tout ce qu'on veut et modifié à notre guise.
+
+Les variables environnement permettent en plus de configurer plus profondément mysql.
+

@@ -1,0 +1,9 @@
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'value'
+  myadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
